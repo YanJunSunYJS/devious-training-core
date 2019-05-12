@@ -90,7 +90,7 @@ function addSoundToActor(int slot, string effect, int level = 0, float volume = 
 	endIf	
 	
 	if effect == "pony"	
-	
+		return
 		bool playSound = false
 	
 		if DTAchievement.isPonyGirlCondition(slot) && DTConfig.achievement_ponygirl_sound_tied == true

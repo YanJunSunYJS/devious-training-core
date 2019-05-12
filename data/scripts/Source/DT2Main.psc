@@ -16,7 +16,7 @@ DT2Core Property DTCore Auto
 ; return number, important during update (compare with current know version number)
 
 Float function getVersion()
-	return 4.0
+	return 4.1
 endFunction
 
 

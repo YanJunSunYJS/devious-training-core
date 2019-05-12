@@ -8,6 +8,7 @@ DT2Tools Property DTTools Auto
 DT2Sound Property DTSound Auto
 
 function addAchievementItems(int slot)
+	return
 	equipPonygirl(slot)
 	
 	if isBlindSlutConditionLite(slot) == true
@@ -47,7 +48,7 @@ endFunction
 bool function isPonyGirlCondition(int slot)
 
 
-
+	return false
 	if DTConfig.playerSlot == slot && DTConfig.achievement_ponygirl_enabled == true
 		if (DTExpert.okBoots(slot) || DTActor.npcs_ref[slot].GetWornForm(DTConfig.slotMask[37]) as Armor == DTStorage.DT_PonyGirlHooves) && DTExpert.okArmbinder(slot) && DTActor.npcs_armbinder[slot] == 100 && DTActor.npcs_boots[slot] == 100 && DTConfig.training_speed_boots > 0 && DTConfig.training_speed_armbinder > 0
 			return true
@@ -59,6 +60,7 @@ bool function isPonyGirlCondition(int slot)
 endFunction
 
 bool function isBlindSlutCondition(int slot)
+	return false
 	if DTConfig.playerSlot == slot && DTConfig.achievement_blindslut_enabled == true && DTExpert.okBlindfold(slot)
 		if DTActor.npcs_blindfold[slot] == 100 
 			return true
@@ -68,7 +70,7 @@ bool function isBlindSlutCondition(int slot)
 endFunction
 
 bool function isPonyGirlConditionLite(int slot)
-
+	return false
 	if DTConfig.achievement_ponygirl_enabled == false 
 		return false
 	endif
@@ -92,6 +94,7 @@ bool function isPonyGirlConditionLite(int slot)
 endFunction
 
 bool function isBlindSlutConditionLite(int slot)
+	return false
 	if DTConfig.achievement_blindslut_enabled == false && DTExpert.okBlindfold(slot)==false
 		return false
 	endif
@@ -102,7 +105,7 @@ endFunction
 
 
 function tryPonyGirl(int slot)
-	
+	return
 	if DTActor.achievementPonyGirl[slot] == true || DTConfig.playerSlot != slot 
 		return
 	endIf
@@ -132,7 +135,7 @@ endFunction
 
 function tryBlindSlut(int slot)
 
-	
+	return
 
 	if DTActor.achievementBlindSlut[slot] == true || DTConfig.playerSlot != slot 
 		return

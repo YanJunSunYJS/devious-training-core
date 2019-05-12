@@ -267,25 +267,25 @@ function calcActorBuffs(int slot)
 	
 	;pony girl
 	
-	if  DTConfig.achievement_ponygirl_enabled == true && DTActor.achievementPonyGirl[slot] == true &&  ( DTExpert.okBoots(slot) == true || DTActor.npcs_ref[slot].GetWornForm(DTConfig.slotMask[37]) as Armor == DTStorage.DT_PonyGirlHooves)
-		carryBuff = carryBuff + 50
-		speedBuff = speedBuff + 10
-		if carryBuff < 0 
-			carryBuff = 0 
-		endIf 
-		if speedBuff < 0 
-			speedBuff = 0 
-		endIf
-	endif
+	;if  DTConfig.achievement_ponygirl_enabled == true && DTActor.achievementPonyGirl[slot] == true &&  ( DTExpert.okBoots(slot) == true || DTActor.npcs_ref[slot].GetWornForm(DTConfig.slotMask[37]) as Armor == DTStorage.DT_PonyGirlHooves)
+	;	carryBuff = carryBuff + 50
+	;	speedBuff = speedBuff + 10
+	;	if carryBuff < 0 
+	;		carryBuff = 0 
+	;	endIf 
+	;	if speedBuff < 0 
+	;		speedBuff = 0 
+	;	endIf
+	;endif
 	
 	
 	
 	
-	if DTAchievement.isPonyGirlCondition(slot) == true
+	;if DTAchievement.isPonyGirlCondition(slot) == true
 
-		speedBuff = speedBuff + ( 85 )	
-		carryBuff = carryBuff + ( 800 )					
-	endif
+	;	speedBuff = speedBuff + ( 85 )	
+	;	carryBuff = carryBuff + ( 800 )					
+	;endif
 	
 	DTTools.log("3:   Calc stats stage 2 end ")
 	speedBuff = speedBuff * buffMult
@@ -1128,8 +1128,8 @@ function calcActorValues(int slot)
 	
 	;-------achievements
 	
-	DTAchievement.tryPonyGirl(slot)
-	DTAchievement.tryBlindSlut(slot)
+	;DTAchievement.tryPonyGirl(slot)
+	;DTAchievement.tryBlindSlut(slot)
 	
 	
 	DTTools.log("2 -Summary: "+actorName+" - boots"+DTActor.npcs_boots[slot])
@@ -1360,7 +1360,7 @@ function updateVisualEffects(int slot, bool force = false, bool newDay = false)
 	DTBody.setArchedFeet(DTActor.npcs_ref[slot], DTTools.getCurrentTrainingStage(slot, DTActor.npcs_boots, DTConfig.boots_min, DTConfig.boots_max))
 	
 	;additional items
-	DTAchievement.addAchievementItems(slot)
+	;DTAchievement.addAchievementItems(slot)
 	
 	;crawl
 	DTBody.forceToAllFours(DTActor.npcs_ref[slot], DTTools.getCurrentTrainingStage(slot, DTActor.npcs_boots, DTConfig.boots_min, DTConfig.boots_max),force)
@@ -1454,9 +1454,9 @@ function onLocationChangeExecute(bool complex=true)
 			if DTActor.npcs_ref[i].hasSpell(DTStorage.DT_Achievement_BlindSlut)
 					DTActor.npcs_ref[i].removeSpell(DTStorage.DT_Achievement_BlindSlut)				
 			endif
-			if DTAchievement.isBlindSlutConditionLite(i) == true			
-				DTActor.npcs_ref[i].addSpell(DTStorage.DT_Achievement_BlindSlut,false)
-			endif
+			;if DTAchievement.isBlindSlutConditionLite(i) == true			
+			;	DTActor.npcs_ref[i].addSpell(DTStorage.DT_Achievement_BlindSlut,false)
+			;endif
 			
 	 	endif
 		i+=1

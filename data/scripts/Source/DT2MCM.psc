@@ -201,9 +201,9 @@ Event OnConfigInit()
 	Pages[1] = "Items and training"
 	Pages[2] = "Body effects"	;;TODO
 	Pages[2] = "Achievements"
-	Pages[3] = "Actors"
-	Pages[4] = "Actors stats"
-	Pages[5] = "Utilities"
+	Pages[2] = "Actors"
+	Pages[3] = "Actors stats"
+	Pages[4] = "Utilities"
 	Return
 EndEvent
 

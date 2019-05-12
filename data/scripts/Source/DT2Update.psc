@@ -6,6 +6,7 @@ DT2Actor Property DTActor Auto
 DT2Storage Property DTStorage Auto
 DT2Core Property DTCore Auto
 DT2Body Property DTBody Auto
+DT2Achievement Property DTAchievement Auto
 zadLibs Property libs Auto
 
 Function Update(Float version)
@@ -189,6 +190,10 @@ if DTConfig.lastVersion < 3.4
 		DTTools.log("Run module updateTo39",2, true)
 		updateTo39()
 	endIf
+	if DTConfig.lastVersion < 4.1
+		DTTools.log("Run module updateTo41",2, true)
+		updateTo41()
+	endIf
 	DTTools.log("Update DT - version:"+version+" FINISH",2, true)
 	
 	DTConfig.lastVersion = version
@@ -199,6 +204,16 @@ if DTConfig.lastVersion < 3.4
 	ModEvent.Send(handle)
 	
 EndFunction
+
+function updateTo41()
+	Game.getPlayer().RemoveShout(DTStorage.DT_TransformToPonyShaut)
+	Game.getPlayer().RemoveShout(DTStorage.DT_TransformToBlindShaut)
+	int i = 0
+	while i < DTActor.getArrayCount()		
+		DTAchievement.resetAllWithAchievementRelated(i)
+		i+=1
+	endwhile
+endFunction
 
 function updateTo39()
 	DTConfig.effect_vaginalPlug_weight = 10
@@ -486,10 +501,10 @@ function updateTo20()
 		if DTActor.achievementPonyGirl[playerRefSlot] == true
 			;DTActor.npcs_ref[playerRefSlot].addSpell(DTStorage.DT_TransformToPony)
 			
-			 Game.TeachWord(DTStorage.DT_TransformPonyWord1)
-			 Game.TeachWord(DTStorage.DT_TransformPonyWord2)
-			 Game.TeachWord(DTStorage.DT_TransformPonyWord3)
-			 DTActor.npcs_ref[playerRefSlot].AddShout(DTStorage.DT_TransformToPonyShaut)
+			; Game.TeachWord(DTStorage.DT_TransformPonyWord1)
+			; Game.TeachWord(DTStorage.DT_TransformPonyWord2)
+			; Game.TeachWord(DTStorage.DT_TransformPonyWord3)
+			; DTActor.npcs_ref[playerRefSlot].AddShout(DTStorage.DT_TransformToPonyShaut)
 		endif
 	endif
 	
