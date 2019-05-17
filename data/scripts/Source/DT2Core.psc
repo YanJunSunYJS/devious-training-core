@@ -988,9 +988,9 @@ function calcActorValues(int slot)
 	if wearedItem || DTActor.npcs_chastityBra[slot] > 0
 		modificators[0] = 0.001 * countWalk
 		modificators[1] = 0.002 * countRun
-		modificators[2] = 0.003 * countSprint
+		modificators[2] = 0.010 * countSprint
 		modificators[3] = 0.002 * countSneak
-		modificators[4] = 0.003 * countJump
+		modificators[4] = 0.008 * countJump
 		modificators[5] = 0.090 * countAttack
 		modificators[6] = 0.002 * countSwim
 		modificators[7] = 0.010 * countHorse
