@@ -1607,6 +1607,14 @@ function processActorSex(Actor akActor, String[] sTags)
 	if iSlot >= 0		
 		DTActor.orgasmCount[iSlot] = DTActor.orgasmCount[iSlot] + 1
 		DTActor.count_orgasm[iSlot] = DTActor.count_orgasm[iSlot] + 1
+		
+		;send event - orgasm
+		int handle = ModEvent.Create("DT_NewEvent")
+		ModEvent.PushForm(handle, DTActor.npcs_ref[iSlot] as Form)
+		ModEvent.PushString(handle, "orgasm")
+		ModEvent.PushInt(handle, DTActor.count_orgasm[iSlot])
+		ModEvent.Send(handle)
+		
 	endIf
 	
 endFunction

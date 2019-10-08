@@ -58,9 +58,17 @@ Event OnHit(ObjectReference akAggressor, Form akSource, Projectile akProjectile,
 	DTTools.log("onHit" + akAggressor,2, true)
 	DTTools.log("onHit" + akSource,2, true)
 	
+	
 	if DTExpert.isZazWeapon(akSource) == true
 		DTActor.count_dmgZad[Slot] = DTActor.count_dmgZad[Slot] + 1
-		
+
+		;send event - zaz hit detected
+		int handle = ModEvent.Create("DT_NewEvent")
+		ModEvent.PushForm(handle, DTActor.npcs_ref[Slot] as Form)
+		ModEvent.PushString(handle, "zazHit")
+		ModEvent.PushInt(handle, DTActor.count_dmgZad[Slot])
+		ModEvent.Send(handle)
+
 		;add sounds
 		if Utility.randomInt(0,2)==0
 			DTSound.addSoundToActor(Slot,"pain",3,1)
@@ -68,6 +76,13 @@ Event OnHit(ObjectReference akAggressor, Form akSource, Projectile akProjectile,
 		
 	else
 		DTActor.count_dmg[Slot] = DTActor.count_dmg[Slot] + 1
+		
+		;send event - std hit detected
+		int handle = ModEvent.Create("DT_NewEvent")
+		ModEvent.PushForm(handle, DTActor.npcs_ref[Slot] as Form)
+		ModEvent.PushString(handle, "stdHit")
+		ModEvent.PushInt(handle, DTActor.count_dmg[Slot])
+		ModEvent.Send(handle)
 		
 		;add sounds
 		if Utility.randomInt(0,5)==0
