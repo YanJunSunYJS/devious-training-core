@@ -8,7 +8,7 @@
 	;send event - zaz hit detected
 	int handle = ModEvent.Create("DT_NewEvent")
 	ModEvent.PushForm(handle, DTActor.npcs_ref[Slot] as Form)
-	ModEvent.PushString(handle, Slot)
+	ModEvent.PushInt(handle, Slot)
 	ModEvent.PushString(handle, "zazHit")
 	ModEvent.PushInt(handle, DTActor.count_dmgZad[Slot])
 	ModEvent.Send(handle)
