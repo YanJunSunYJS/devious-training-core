@@ -9,7 +9,8 @@ Scriptname DT2Main extends Quest
 DT2Config Property DTConfig Auto
 DT2Update Property DTUpdate Auto 
 DT2Core Property DTCore Auto 
-
+DT2Storage Property DTStorage Auto
+DT2Tools Property DTTools Auto
 
 
 ; --- --- -- - GET FLOAT NUMBER WITH CURRENT VERSION - -- --- --- ;
@@ -67,9 +68,14 @@ endEvent
 
 Event OnUpdate()
 	if DTConfig.modEnabled == true
-	
-		; in this function i process all what possible
-		DTCore.Process()
+	DTTools.log("Update start")
+		if DTStorage.Semaphor == false
+			DTTools.log("Update inside")
+			DTStorage.Semaphor = true 
+			; in this function i process all what possible
+			DTCore.Process()
+			DTStorage.Semaphor = false
+		endif
 		RegisterForSingleUpdate(DTConfig.updateInterval)
 	else
 		turnOffMod()

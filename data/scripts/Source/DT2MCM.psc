@@ -78,6 +78,7 @@ Event OnConfigClose()
 		DTCore.mcmResetAll()
 		DTConfig.process_wildcard = false
 		DTCore.sendStatus("enable")
+		
 	else
 		;Utility.Wait(DTConfig.updateInterval / 4)	
 		DTConfig.process_wildcard = true
@@ -93,7 +94,7 @@ Event OnConfigClose()
 	
 	
 	if DTConfig.modEnabled==true
-		
+		DTStorage.Semaphor = false
 		DTMain.turnOnMod(0.01)
 	endif	
 	DTConfig.mcmWorking = false
@@ -101,7 +102,7 @@ Event OnConfigClose()
 endEvent
 
 Event OnConfigInit()
-
+	DTStorage.Semaphor = true 
 	generalEnabled = 0
 	
 	if DTConfig.modEnabled == true
@@ -732,9 +733,13 @@ Event OnPageReset(string page)
 		actorStats = AddMenuOption("Select Actor", actorListString[actorPointer as int],getEnableFlag(generalEnabled))	
 		AddEmptyOption()
 		
+		
 		if DTActor.isRegistered(DTActor.npcs_ref[actorPointer]) == -1
 			AddHeaderOption("Please select actor")
-		else
+		else		
+		
+		resetActorButton = AddTextOption("Reset progress", "Click!")
+		AddEmptyOption()
 		;TODO :AddTextOption
 			AddTextOption("Boots status: ",DTExpert.levelToName(DTTools.getCurrentTrainingStage(actorPointer, DTActor.npcs_boots, DTConfig.boots_min, DTConfig.boots_max)),OPTION_FLAG_DISABLED)
 			;AddHeaderOption("Boots status: "+DTExpert.levelToName(DTTools.getCurrentTrainingStage(actorPointer, DTActor.npcs_boots, DTConfig.boots_min, DTConfig.boots_max)))
@@ -1355,6 +1360,20 @@ Event OnOptionSelect(Int Menu)
 		i+=1
 	endWhile
 
+	if Menu == resetActorButton
+		SetTextOptionValue(resetActorButton, "START")
+		ForcePageReset()
+		Actor tmpActor = DTActor.npcs_ref[actorPointer]
+		SetTextOptionValue(resetActorButton, "Unregister...")
+		ForcePageReset()
+		DTActor.unregisterActor(actorPointer)
+		SetTextOptionValue(resetActorButton, "Register...")
+		ForcePageReset()
+		DTActor.registerActor(tmpActor)
+		SetTextOptionValue(resetActorButton, "Click!")
+		ForcePageReset()
+	endif
+	
 	if Menu == effect_bootsAllow0
 		Armor thisArmor = DTConfig.playerRef.GetWornForm(DTConfig.slotMask[37]) as Armor
 		if DTConfig.acceptBoots0.getName()==""
@@ -2170,3 +2189,5 @@ int training_speed_analplug
 int training_speed_vaginalplug
 
 int bodyPointer
+
+int resetActorButton

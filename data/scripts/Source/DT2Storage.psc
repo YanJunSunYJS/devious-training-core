@@ -1,5 +1,7 @@
 Scriptname DT2Storage extends Quest  
 
+Bool Property Semaphor Auto
+
 
 Armor Property DT_achievement_ponygirl Auto
 
