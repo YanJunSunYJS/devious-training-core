@@ -13,24 +13,27 @@ DT2Main Property DTMain Auto
 
 SexLabFramework Property sexlab auto
 
-function Process()
+function Process(bool isBreakable = false)
 	DTTools.log("Start process")
 	if DTConfig.modEnabled == false
 		return 
 	endIf
+	;day counter
+	if (isBreakable==false)
+		if DTConfig.gameDaysCount != Game.QueryStat("Days Passed") 
+			DTConfig.gameDaysCount = Game.QueryStat("Days Passed") 
+			newDay()
+		endIf
+	endif
 	DTTools.log("1: Scan actors start")
 	;scan
-	scanForActors()
+	scanForActors(true)
 	DTTools.log("1: Scan actors stop")
 	DTTools.log("2: Calc progress start")
-	calcProgress()
+	calcProgress(isBreakable)
 	DTTools.log("2: Calc progress stop")
 	
-	;day counter
-	if DTConfig.gameDaysCount != Game.QueryStat("Days Passed") 
-		DTConfig.gameDaysCount = Game.QueryStat("Days Passed") 
-		newDay()
-	endIf
+	
 	
 	DTTools.log("End process")
 endFunction
@@ -56,9 +59,12 @@ endFunction
 
 
 
-function calcProgress()
+function calcProgress(bool isBreakable = false)
 	int i = 0
 	while i < DTActor.getArrayCount()
+		if(isBreakable==true && DTStorage.UpdateIsRun==false)
+			return
+		endif
 		if DTActor.npcs_ref[i] != None && isReadyForWatchdog(DTActor.npcs_ref[i]) == true
 			calcActorValues(i)
 		else
@@ -1398,13 +1404,16 @@ endFunction
 
 
 
-function scanForActors()
+function scanForActors(bool isBreakable = false)
 	Actor[] actors
 	actors = DTTools.getActors(DTConfig.playerRef)
 	
 	int i = actors.length
 	
 	while i > 0
+		if(isBreakable==true && DTStorage.UpdateIsRun==false)
+			return
+		endif
 		i -= 1
 		if actors[i]!=None
 			

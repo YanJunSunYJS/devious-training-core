@@ -94,7 +94,7 @@ Event OnConfigClose()
 	
 	
 	if DTConfig.modEnabled==true
-		DTStorage.Semaphor = false
+		;DTStorage.Semaphor = false
 		DTMain.turnOnMod(0.01)
 	endif	
 	DTConfig.mcmWorking = false
@@ -102,7 +102,7 @@ Event OnConfigClose()
 endEvent
 
 Event OnConfigInit()
-	DTStorage.Semaphor = true 
+	;DTStorage.Semaphor = true 
 	generalEnabled = 0
 	
 	if DTConfig.modEnabled == true

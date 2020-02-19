@@ -69,13 +69,13 @@ endEvent
 Event OnUpdate()
 	if DTConfig.modEnabled == true
 	DTTools.log("Update start")
-		if DTStorage.Semaphor == false
+		;if DTStorage.Semaphor == false
 			DTTools.log("Update inside")
 			DTStorage.Semaphor = true 
 			; in this function i process all what possible
-			DTCore.Process()
-			DTStorage.Semaphor = false
-		endif
+			DTCore.Process(true)
+		;	DTStorage.Semaphor = false
+		;endif
 		RegisterForSingleUpdate(DTConfig.updateInterval)
 	else
 		turnOffMod()
@@ -89,6 +89,7 @@ endEvent
 
 function turnOffMod()
 	UnregisterForUpdate()
+	DTStorage.UpdateIsRun = false
 endFunction
 
 
@@ -97,6 +98,7 @@ endFunction
 ; TODO: send event to other plugins (?)
 
 function turnOnMod(float time = 0.0)
+	DTStorage.UpdateIsRun = true
 	if time==0
 		time = DTConfig.updateInterval
 	endIf
